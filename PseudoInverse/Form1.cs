@@ -56,10 +56,14 @@ namespace PseudoInverse
             dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             dgv.Enabled = false;
             dgv.RowHeadersVisible = false;
-
-
+            
             int M = MNValue();
             int N = MNValue();
+
+            while(M == N)
+            {
+                N = MNValue();
+            }
 
             dgvColumn(M);
 
@@ -82,14 +86,14 @@ namespace PseudoInverse
         {
             int M = 0, N = 0;
             dgv.Rows.Clear();
-            if(Convert.ToInt32(mValue.Text) >= 1 && Convert.ToInt32(mValue.Text) < 6 && Convert.ToInt32(nValue.Text) >= 1 && Convert.ToInt32(nValue.Text) < 6)
+            if(Convert.ToInt32(mValue.Text) >= 1 && Convert.ToInt32(mValue.Text) < 6 && Convert.ToInt32(nValue.Text) >= 1 && Convert.ToInt32(nValue.Text) < 6 && Convert.ToInt32(nValue.Text) != Convert.ToInt32(mValue.Text))
             {
                  M = Convert.ToInt32(mValue.Text);
                  N = Convert.ToInt32(nValue.Text);
             }
             else
             {
-                MessageBox.Show("Girdiğiniz Sayı 1-5 aralığında değil.");
+                MessageBox.Show("Girdiğiniz Sayı 1-5 aralığında değil ve/veya M=N ");
                 mValue.Text = string.Empty;
                 nValue.Text = string.Empty;
             }

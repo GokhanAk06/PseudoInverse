@@ -35,6 +35,8 @@
             this.handBttn = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
             this.SuspendLayout();
             // 
@@ -43,14 +45,14 @@
             this.dgv.AllowUserToAddRows = false;
             this.dgv.AllowUserToDeleteRows = false;
             this.dgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv.Location = new System.Drawing.Point(12, 12);
+            this.dgv.Location = new System.Drawing.Point(21, 18);
             this.dgv.Name = "dgv";
             this.dgv.Size = new System.Drawing.Size(125, 129);
             this.dgv.TabIndex = 1;
             // 
             // rndmBttn
             // 
-            this.rndmBttn.Location = new System.Drawing.Point(175, 12);
+            this.rndmBttn.Location = new System.Drawing.Point(152, 18);
             this.rndmBttn.Name = "rndmBttn";
             this.rndmBttn.Size = new System.Drawing.Size(75, 23);
             this.rndmBttn.TabIndex = 2;
@@ -60,7 +62,7 @@
             // 
             // mValue
             // 
-            this.mValue.Location = new System.Drawing.Point(12, 222);
+            this.mValue.Location = new System.Drawing.Point(19, 168);
             this.mValue.Name = "mValue";
             this.mValue.Size = new System.Drawing.Size(36, 20);
             this.mValue.TabIndex = 3;
@@ -68,7 +70,7 @@
             // 
             // nValue
             // 
-            this.nValue.Location = new System.Drawing.Point(54, 222);
+            this.nValue.Location = new System.Drawing.Point(61, 168);
             this.nValue.Name = "nValue";
             this.nValue.Size = new System.Drawing.Size(36, 20);
             this.nValue.TabIndex = 4;
@@ -76,7 +78,7 @@
             // 
             // handBttn
             // 
-            this.handBttn.Location = new System.Drawing.Point(96, 220);
+            this.handBttn.Location = new System.Drawing.Point(103, 166);
             this.handBttn.Name = "handBttn";
             this.handBttn.Size = new System.Drawing.Size(75, 23);
             this.handBttn.TabIndex = 5;
@@ -87,7 +89,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(22, 206);
+            this.label1.Location = new System.Drawing.Point(29, 152);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(16, 13);
             this.label1.TabIndex = 6;
@@ -96,17 +98,37 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(65, 206);
+            this.label2.Location = new System.Drawing.Point(72, 152);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(15, 13);
             this.label2.TabIndex = 7;
             this.label2.Text = "N";
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(23, 3);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(16, 13);
+            this.label3.TabIndex = 8;
+            this.label3.Text = "M";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(3, 21);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(15, 13);
+            this.label4.TabIndex = 9;
+            this.label4.Text = "N";
+            // 
             // mainScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(411, 254);
+            this.ClientSize = new System.Drawing.Size(237, 202);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.handBttn);
@@ -131,6 +153,8 @@
         private System.Windows.Forms.Button handBttn;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
     }
 }
 
