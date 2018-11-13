@@ -1,6 +1,6 @@
 ﻿namespace PseudoInverse
 {
-    partial class Form1
+    partial class mainScreen
     {
         /// <summary>
         /// Required designer variable.
@@ -28,102 +28,109 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.dgv = new System.Windows.Forms.DataGridView();
+            this.rndmBttn = new System.Windows.Forms.Button();
+            this.mValue = new System.Windows.Forms.TextBox();
+            this.nValue = new System.Windows.Forms.TextBox();
+            this.handBttn = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.label2 = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
             this.SuspendLayout();
+            // 
+            // dgv
+            // 
+            this.dgv.AllowUserToAddRows = false;
+            this.dgv.AllowUserToDeleteRows = false;
+            this.dgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv.Location = new System.Drawing.Point(12, 12);
+            this.dgv.Name = "dgv";
+            this.dgv.Size = new System.Drawing.Size(125, 129);
+            this.dgv.TabIndex = 1;
+            // 
+            // rndmBttn
+            // 
+            this.rndmBttn.Location = new System.Drawing.Point(175, 12);
+            this.rndmBttn.Name = "rndmBttn";
+            this.rndmBttn.Size = new System.Drawing.Size(75, 23);
+            this.rndmBttn.TabIndex = 2;
+            this.rndmBttn.Text = "Random";
+            this.rndmBttn.UseVisualStyleBackColor = true;
+            this.rndmBttn.Click += new System.EventHandler(this.rndmBttn_Click);
+            // 
+            // mValue
+            // 
+            this.mValue.Location = new System.Drawing.Point(12, 222);
+            this.mValue.Name = "mValue";
+            this.mValue.Size = new System.Drawing.Size(36, 20);
+            this.mValue.TabIndex = 3;
+            this.mValue.TextChanged += new System.EventHandler(this.mValue_TextChanged);
+            // 
+            // nValue
+            // 
+            this.nValue.Location = new System.Drawing.Point(54, 222);
+            this.nValue.Name = "nValue";
+            this.nValue.Size = new System.Drawing.Size(36, 20);
+            this.nValue.TabIndex = 4;
+            this.nValue.TextChanged += new System.EventHandler(this.nValue_TextChanged);
+            // 
+            // handBttn
+            // 
+            this.handBttn.Location = new System.Drawing.Point(96, 220);
+            this.handBttn.Name = "handBttn";
+            this.handBttn.Size = new System.Drawing.Size(75, 23);
+            this.handBttn.TabIndex = 5;
+            this.handBttn.Text = "Manuel";
+            this.handBttn.UseVisualStyleBackColor = true;
+            this.handBttn.Click += new System.EventHandler(this.handBttn_Click);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(753, 9);
+            this.label1.Location = new System.Drawing.Point(22, 206);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "label1";
+            this.label1.Size = new System.Drawing.Size(16, 13);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "M";
             // 
-            // dataGridView1
+            // label2
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column1,
-            this.Column2,
-            this.Column3,
-            this.Column4,
-            this.Column5});
-            this.dataGridView1.Location = new System.Drawing.Point(12, 12);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(346, 285);
-            this.dataGridView1.TabIndex = 1;
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(65, 206);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(15, 13);
+            this.label2.TabIndex = 7;
+            this.label2.Text = "N";
             // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "";
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            this.Column1.Width = 60;
-            // 
-            // Column2
-            // 
-            this.Column2.HeaderText = "";
-            this.Column2.Name = "Column2";
-            this.Column2.ReadOnly = true;
-            this.Column2.Width = 60;
-            // 
-            // Column3
-            // 
-            this.Column3.HeaderText = "";
-            this.Column3.Name = "Column3";
-            this.Column3.ReadOnly = true;
-            this.Column3.Width = 60;
-            // 
-            // Column4
-            // 
-            this.Column4.HeaderText = "";
-            this.Column4.Name = "Column4";
-            this.Column4.ReadOnly = true;
-            this.Column4.Width = 60;
-            // 
-            // Column5
-            // 
-            this.Column5.HeaderText = "";
-            this.Column5.Name = "Column5";
-            this.Column5.ReadOnly = true;
-            this.Column5.Width = 60;
-            // 
-            // Form1
+            // mainScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.dataGridView1);
+            this.ClientSize = new System.Drawing.Size(411, 254);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Controls.Add(this.handBttn);
+            this.Controls.Add(this.nValue);
+            this.Controls.Add(this.mValue);
+            this.Controls.Add(this.rndmBttn);
+            this.Controls.Add(this.dgv);
+            this.Name = "mainScreen";
+            this.Text = "mainScreen";
             this.Load += new System.EventHandler(this.Form1_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
+        private System.Windows.Forms.DataGridView dgv;
+        private System.Windows.Forms.Button rndmBttn;
+        private System.Windows.Forms.TextBox mValue;
+        private System.Windows.Forms.TextBox nValue;
+        private System.Windows.Forms.Button handBttn;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
+        private System.Windows.Forms.Label label2;
     }
 }
 
