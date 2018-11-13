@@ -16,5 +16,28 @@ namespace PseudoInverse
         {
             InitializeComponent();
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            label1.Text = MatrixValue().ToString();
+
+        }
+
+        public int MNValue()
+        {
+            Random rnd = new Random();
+            int rand = rnd.Next(1,5);
+            return rand;
+        }
+
+        public double MatrixValue()
+        {
+            Random rnd = new Random();
+            double rand = rnd.NextDouble()*(9.00-1.00)+1.00;
+            //Virgülden sonra 2 basamak alabilmek için.
+            rand = Math.Round(rand,1);
+            return rand;
+        }
+
     }
 }
