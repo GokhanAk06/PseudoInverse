@@ -60,6 +60,7 @@ namespace PseudoInverse
             int M = MNValue();
             int N = MNValue();
 
+            //Aynı ise?
             while(M == N)
             {
                 N = MNValue();
