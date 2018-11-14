@@ -37,7 +37,11 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.MxMTransposeDgv = new System.Windows.Forms.DataGridView();
+            this.nxtStepBttn = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.MxMTransposeDgv)).BeginInit();
             this.SuspendLayout();
             // 
             // dgv
@@ -122,11 +126,43 @@
             this.label4.TabIndex = 9;
             this.label4.Text = "N";
             // 
+            // MxMTransposeDgv
+            // 
+            this.MxMTransposeDgv.AllowUserToAddRows = false;
+            this.MxMTransposeDgv.AllowUserToDeleteRows = false;
+            this.MxMTransposeDgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.MxMTransposeDgv.Location = new System.Drawing.Point(233, 18);
+            this.MxMTransposeDgv.Name = "MxMTransposeDgv";
+            this.MxMTransposeDgv.ReadOnly = true;
+            this.MxMTransposeDgv.Size = new System.Drawing.Size(191, 171);
+            this.MxMTransposeDgv.TabIndex = 10;
+            // 
+            // nxtStepBttn
+            // 
+            this.nxtStepBttn.Location = new System.Drawing.Point(152, 47);
+            this.nxtStepBttn.Name = "nxtStepBttn";
+            this.nxtStepBttn.Size = new System.Drawing.Size(75, 23);
+            this.nxtStepBttn.TabIndex = 11;
+            this.nxtStepBttn.Text = "Next Step";
+            this.nxtStepBttn.UseVisualStyleBackColor = true;
+            this.nxtStepBttn.Click += new System.EventHandler(this.nxtStepBttn_Click);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(233, 3);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(0, 13);
+            this.label5.TabIndex = 12;
+            // 
             // mainScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(237, 202);
+            this.ClientSize = new System.Drawing.Size(586, 380);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.nxtStepBttn);
+            this.Controls.Add(this.MxMTransposeDgv);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -140,6 +176,7 @@
             this.Text = "mainScreen";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.MxMTransposeDgv)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -155,6 +192,9 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.DataGridView MxMTransposeDgv;
+        private System.Windows.Forms.Button nxtStepBttn;
+        private System.Windows.Forms.Label label5;
     }
 }
 
