@@ -105,6 +105,8 @@ namespace PseudoInverse
             {
                 M = Convert.ToInt32(mValue.Text);
                 N = Convert.ToInt32(nValue.Text);
+                mValue.Enabled = false;
+                nValue.Enabled = false;
             }
             else
             {
@@ -123,7 +125,6 @@ namespace PseudoInverse
             dgv.Enabled = true;
             dgv.RowHeadersVisible = false;
 
-            
             //first matrise atama işlemi yapılacaktır.
         }
 
@@ -221,10 +222,18 @@ namespace PseudoInverse
                     MessageBox.Show("(A.Atranspose)Inverse ü bulduk. Atranspose(soldan) ile çarpımı hesaplanacaktır.");
                     result = multiplication(mTranspose(firstMatris), inverse(E));
                 }
-                label5.Text = "A'nın Pseudo İnversi = ";
+                label5.Text += " = A'nın Pseudo İnversi ";
                 MessageBox.Show("A Matrisimizin Pseudo İnverse Matrisi");
                 nextDgvWriter(result);
-                
+            }
+            else if(sayac == 3)
+            {
+                sayac += 1;
+                label5.Text = "A x A'nın Pseudo İnversi = ";
+                MessageBox.Show("A Matrisimizin Pseudo İnverse Matrisi ile Çarpımı");
+                double[,] AxA = new double[firstMatris.GetLength(0), result.GetLength(1)];
+                AxA = multiplication(firstMatris, result);
+                nextDgvWriter(AxA);
             }
 
         }
@@ -293,8 +302,8 @@ namespace PseudoInverse
                 MxMTransposeDgv.Rows.Add();
                 for(int j = 0; j < matrix.GetLength(1); j++)
                 {
-                    rand = Math.Round(matrix[i, j], 5);
-                    MxMTransposeDgv.Rows[i].Cells[j].Value = rand;
+                    //rand = Math.Round(matrix[i, j], 5);
+                    MxMTransposeDgv.Rows[i].Cells[j].Value = matrix[i,j];
                 }
             }
         }
@@ -423,7 +432,33 @@ namespace PseudoInverse
             return inverse;
         }
 
+        private void OkBttn_Click(object sender, EventArgs e)
+        {
+            int M = Convert.ToInt32(mValue.Text);
+            int N = Convert.ToInt32(nValue.Text);
+            firstMatris = new double[M, N];
+            mValue.Enabled = true;
+            nValue.Enabled = true;
+            for(int i = 0; i < M; i++)
+            {
+                for(int j = 0; j < N; j++)
+                {
+                    if(dgv.Rows[i].Cells[j].Value != null)
+                        firstMatris[i, j] = Convert.ToDouble(dgv.Rows[i].Cells[j].Value);
+                    else
+                        firstMatris[i, j] = 0;
+                }
+            }
+        }
 
+        private void label1_Click(object sender, EventArgs e)
+        {
 
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
