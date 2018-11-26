@@ -134,7 +134,7 @@
             this.MxMTransposeDgv.Location = new System.Drawing.Point(233, 21);
             this.MxMTransposeDgv.Name = "MxMTransposeDgv";
             this.MxMTransposeDgv.ReadOnly = true;
-            this.MxMTransposeDgv.Size = new System.Drawing.Size(211, 145);
+            this.MxMTransposeDgv.Size = new System.Drawing.Size(509, 168);
             this.MxMTransposeDgv.TabIndex = 10;
             // 
             // nxtStepBttn
@@ -159,7 +159,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(586, 380);
+            this.ClientSize = new System.Drawing.Size(754, 202);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.nxtStepBttn);
             this.Controls.Add(this.MxMTransposeDgv);

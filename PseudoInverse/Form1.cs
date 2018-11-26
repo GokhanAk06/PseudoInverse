@@ -15,8 +15,6 @@ namespace PseudoInverse
 
         Random rnd = new Random();
         double[,] firstMatris;
-        double[,] AtA;
-        double[,] AAt;
         double[,] E;
         int sayac = 0;
 
@@ -87,6 +85,7 @@ namespace PseudoInverse
                     firstMatris[i, j] = Convert.ToDouble(dgv.Rows[i].Cells[j].Value);
                 }
             }
+           // MessageBox.Show("get0 değeri " + firstMatris.GetLength(0));
 
         }
 
@@ -123,6 +122,9 @@ namespace PseudoInverse
             dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             dgv.Enabled = true;
             dgv.RowHeadersVisible = false;
+
+            
+            //first matrise atama işlemi yapılacaktır.
         }
 
 
@@ -168,25 +170,28 @@ namespace PseudoInverse
             return mxmTranspose;
         }
 
-        int matrisimiz = 0;
+        int which = 0;
+        double[,] result;
         private void nxtStepBttn_Click(object sender, EventArgs e)
         {
             if(sayac == 0)
             {
                 //Mtranspose X M
                 sayac += 1;
-                mxmTransposeDgvWriter(firstMatris);
+                label5.Text = "A^A";
                 MessageBox.Show("A Transpose x A nın determinantı hesaplanacaktır.");
+                mxmTransposeDgvWriter(firstMatris);
+                which = 1;
                 double determinant = DET(E.GetLength(0), E);
                 if(determinant == 0)
                 {
-                    matrisimiz = 1;
+                    label5.Text = "AA^";
                     MessageBox.Show("A Transpose x A nın determinantı 0 olduğundan dolayı A x A Transpose hesaplanacaktır.");
                     mxmTransposeDgvWriter(mTranspose(firstMatris));
+                    which = 2;
                     determinant = DET(E.GetLength(0), E);
                     if(determinant == 0)
                     {
-                        matrisimiz = 2;
                         MessageBox.Show("Her iki durumda da determinant 0 olduğundan dolayı matrisin tersi bulunamamaktadır.");
                         return;
                     }
@@ -196,19 +201,52 @@ namespace PseudoInverse
             else if(sayac == 1)
             {
                 sayac += 1;
-                if(matrisimiz == 0)
-                {
-
-                }
-                MessageBox.Show("Matrisin İnverse Edilmiş Hali.");
+                label5.Text = "(A^A|AA^)Inverse";
+                MessageBox.Show("Bulduğumuz Çarpımın İnverse Edilmiş Hali.");
                 nextDgvWriter(inverse(E));
-
-
+            }
+            else if(sayac == 2)
+            {
+                sayac += 1;
+                result = new double[firstMatris.GetLength(1), firstMatris.GetLength(0)];
+                if(which == 1)
+                {
+                    label5.Text = "(A^A)Inv * A^";
+                    MessageBox.Show("(Atranspose.A)Inverse ü bulduk. Atranspose(sağdan) ile çarpımı hesaplanacaktır.");
+                    result = multiplication(inverse(E), mTranspose(firstMatris));
+                }
+                else if(which == 2)
+                {
+                    label5.Text = "A^ * (AA^)Inv";
+                    MessageBox.Show("(A.Atranspose)Inverse ü bulduk. Atranspose(soldan) ile çarpımı hesaplanacaktır.");
+                    result = multiplication(mTranspose(firstMatris), inverse(E));
+                }
+                label5.Text = "A'nın Pseudo İnversi = ";
+                MessageBox.Show("A Matrisimizin Pseudo İnverse Matrisi");
+                nextDgvWriter(result);
+                
             }
 
-            // nextDgvWriter(Eselon(firstMatris), "Eselon");
-
         }
+
+        public double[,] multiplication(double[,] left, double[,] right)
+        {
+            double[,] result = new double[left.GetLength(0), right.GetLength(1)];
+
+            for(int i = 0; i < result.GetLength(0); i++)
+            {
+                for(int j = 0; j < result.GetLength(1); j++)
+                {
+                    result[i, j] = 0;
+                    for(int k = 0; k < left.GetLength(1); k++)
+                    {
+                        result[i, j] = result[i, j] + left[i, k] * right[k, j];
+                    }
+                }
+            }
+            return result;
+        }
+
 
         public double[,] mTranspose(double[,] matrix)
         {
@@ -256,7 +294,7 @@ namespace PseudoInverse
                 for(int j = 0; j < matrix.GetLength(1); j++)
                 {
                     rand = Math.Round(matrix[i, j], 5);
-                    MxMTransposeDgv.Rows[i].Cells[j].Value = rand ;
+                    MxMTransposeDgv.Rows[i].Cells[j].Value = rand;
                 }
             }
         }
