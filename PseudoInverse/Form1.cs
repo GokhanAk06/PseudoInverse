@@ -101,7 +101,7 @@ namespace PseudoInverse
             sayac = 0;
             int M = 0, N = 0;
             dgv.Rows.Clear();
-            if(Convert.ToInt32(mValue.Text) >= 1 && Convert.ToInt32(mValue.Text) < 6 && Convert.ToInt32(nValue.Text) >= 1 && Convert.ToInt32(nValue.Text) < 6 && Convert.ToInt32(nValue.Text) != Convert.ToInt32(mValue.Text))
+            if(Convert.ToInt32(mValue.Text) >= 1 && Convert.ToInt32(mValue.Text) < 6 && Convert.ToInt32(nValue.Text) >= 1 && Convert.ToInt32(nValue.Text) < 6)// && Convert.ToInt32(nValue.Text) != Convert.ToInt32(mValue.Text))
             {
                 M = Convert.ToInt32(mValue.Text);
                 N = Convert.ToInt32(nValue.Text);
@@ -194,6 +194,7 @@ namespace PseudoInverse
                     if(determinant == 0)
                     {
                         MessageBox.Show("Her iki durumda da determinant 0 olduğundan dolayı matrisin tersi bulunamamaktadır.");
+                        //Transpozu /(tüm sayıların karelerinin toplamı) bize pseudpinversini verecektir. Güncelle.
                         return;
                     }
                 }
@@ -249,7 +250,7 @@ namespace PseudoInverse
                     result[i, j] = 0;
                     for(int k = 0; k < left.GetLength(1); k++)
                     {
-                        result[i, j] = result[i, j] + left[i, k] * right[k, j];
+                        result[i, j] = result[i, j] + (left[i, k] * right[k, j]);
                     }
                 }
             }
