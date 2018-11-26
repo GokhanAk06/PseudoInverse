@@ -17,10 +17,13 @@ namespace PseudoInverse
         double[,] firstMatris;
         double[,] E;
         int sayac = 0;
+        int CarpmaSayisi, toplamaSayisi;
 
         public mainScreen()
         {
             InitializeComponent();
+            OkBttn.Enabled = false;
+            nxtStepBttn.Enabled = false;
         }
 
         //--------------> M
@@ -34,7 +37,6 @@ namespace PseudoInverse
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
         }
 
         public int MNValue()
@@ -56,6 +58,9 @@ namespace PseudoInverse
         private void rndmBttn_Click(object sender, EventArgs e)
         {
             sayac = 0;
+            toplamaSayisi = 0;
+            CarpmaSayisi = 0;
+            nxtStepBttn.Enabled = true;
             dgv.Rows.Clear();
             dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             dgv.Enabled = false;
@@ -85,7 +90,7 @@ namespace PseudoInverse
                     firstMatris[i, j] = Convert.ToDouble(dgv.Rows[i].Cells[j].Value);
                 }
             }
-           // MessageBox.Show("get0 değeri " + firstMatris.GetLength(0));
+            // MessageBox.Show("get0 değeri " + firstMatris.GetLength(0));
 
         }
 
@@ -99,21 +104,32 @@ namespace PseudoInverse
         private void handBttn_Click(object sender, EventArgs e)
         {
             sayac = 0;
+            toplamaSayisi = 0;
+            CarpmaSayisi = 0;
             int M = 0, N = 0;
             dgv.Rows.Clear();
-            if(Convert.ToInt32(mValue.Text) >= 1 && Convert.ToInt32(mValue.Text) < 6 && Convert.ToInt32(nValue.Text) >= 1 && Convert.ToInt32(nValue.Text) < 6)// && Convert.ToInt32(nValue.Text) != Convert.ToInt32(mValue.Text))
+            if(mValue.Text != "" && nValue.Text != "")
             {
-                M = Convert.ToInt32(mValue.Text);
-                N = Convert.ToInt32(nValue.Text);
-                mValue.Enabled = false;
-                nValue.Enabled = false;
+                if(Convert.ToInt32(mValue.Text) >= 1 && Convert.ToInt32(mValue.Text) < 6 && Convert.ToInt32(nValue.Text) >= 1 && Convert.ToInt32(nValue.Text) < 6 && Convert.ToInt32(nValue.Text) != Convert.ToInt32(mValue.Text))
+                {
+                    M = Convert.ToInt32(mValue.Text);
+                    N = Convert.ToInt32(nValue.Text);
+                    mValue.Enabled = false;
+                    nValue.Enabled = false;
+                    OkBttn.Enabled = true;
+                }
+                else
+                {
+                    MessageBox.Show("Girdiğiniz Sayı 1-5 aralığında değil ve/veya M=N ");
+                    mValue.Text = string.Empty;
+                    nValue.Text = string.Empty;
+                }
             }
             else
             {
-                MessageBox.Show("Girdiğiniz Sayı 1-5 aralığında değil ve/veya M=N ");
-                mValue.Text = string.Empty;
-                nValue.Text = string.Empty;
+                MessageBox.Show("Lütfen M,N değerleri giriniz");
             }
+           
 
             dgvColumn(N);
             for(int i = 0; i < M; i++)
@@ -164,6 +180,9 @@ namespace PseudoInverse
                     for(int k = 0; k < M.GetLength(1); k++)
                     {
                         toplam += M[i, k] * MTr[k, j];
+
+                        toplamaSayisi += 1;
+                        CarpmaSayisi += 1;
                     }
                     mxmTranspose[i, j] = toplam;
                 }
@@ -173,6 +192,8 @@ namespace PseudoInverse
 
         int which = 0;
         double[,] result;
+        double[,] rand2;
+        double[,] rand3;
         private void nxtStepBttn_Click(object sender, EventArgs e)
         {
             if(sayac == 0)
@@ -225,20 +246,53 @@ namespace PseudoInverse
                 }
                 label5.Text += " = A'nın Pseudo İnversi ";
                 MessageBox.Show("A Matrisimizin Pseudo İnverse Matrisi");
-                nextDgvWriter(result);
+
+                rand3 = new double[result.GetLength(0), result.GetLength(1)];
+                for(int i = 0; i < result.GetLength(0); i++)
+                {
+                    for(int j = 0; j < result.GetLength(1); j++)
+                    {
+                        rand3[i, j] = (Math.Ceiling(result[i, j] * 10000) / 10000);
+                    }
+                }
+                nextDgvWriter(rand3);
+
+                MessageBox.Show("Toplam Çarpma/Bölme Sayısı= "+CarpmaSayisi+"\nToplam Toplama/Çıkartma Sayısı= "+toplamaSayisi);
             }
-            else if(sayac == 3)
-            {
-                sayac += 1;
-                label5.Text = "A x A'nın Pseudo İnversi = ";
-                MessageBox.Show("A Matrisimizin Pseudo İnverse Matrisi ile Çarpımı");
-                double[,] AxA = new double[firstMatris.GetLength(0), result.GetLength(1)];
-                AxA = multiplication(firstMatris, result);
-                nextDgvWriter(AxA);
-            }
+            //A Çarpı A nın pseudo invers hesabı.
+
+            //else if(sayac == 3)
+            //{
+            //    sayac += 1;
+            //    label5.Text = "A x A'nın Pseudo İnversi = ";
+            //    MessageBox.Show("A Matrisimizin Pseudo İnverse Matrisi ile Çarpımı");
+            //    double[,] AxA = new double[firstMatris.GetLength(0), result.GetLength(1)];
+            //    rand2 = new double[AxA.GetLength(0), AxA.GetLength(1)];
+            //    rand3 = new double[result.GetLength(0), result.GetLength(1)];
+
+            //    for(int i = 0; i < result.GetLength(0); i++)
+            //    {
+            //        for(int j = 0; j < result.GetLength(1); j++)
+            //        {
+            //            rand3[i, j] = (Math.Ceiling(result[i, j] * 1000) / 1000);
+
+            //        }
+            //    }
+
+            //    AxA = multiplication(firstMatris, rand3);
+            //    for(int i = 0; i < AxA.GetLength(0); i++)
+            //    {
+            //        for(int j = 0; j < AxA.GetLength(1); j++)
+            //        {
+            //            rand2[i, j] = Math.Round(AxA[i, j], 5);
+            //        }
+            //    }
+            //    nextDgvWriter(rand2);
+            //}
 
         }
 
+        //Çarpma işlemi.
         public double[,] multiplication(double[,] left, double[,] right)
         {
             double[,] result = new double[left.GetLength(0), right.GetLength(1)];
@@ -251,6 +305,9 @@ namespace PseudoInverse
                     for(int k = 0; k < left.GetLength(1); k++)
                     {
                         result[i, j] = result[i, j] + (left[i, k] * right[k, j]);
+
+                        toplamaSayisi += 1;
+                        CarpmaSayisi += 1;
                     }
                 }
             }
@@ -297,14 +354,14 @@ namespace PseudoInverse
             MxMTransposeDgv.Enabled = false;
             MxMTransposeDgv.RowHeadersVisible = false;
             MxMTransposeDgv.ColumnCount = matrix.GetLength(1);
-            double rand;
+
             for(int i = 0; i < matrix.GetLength(0); i++)
             {
                 MxMTransposeDgv.Rows.Add();
                 for(int j = 0; j < matrix.GetLength(1); j++)
                 {
                     //rand = Math.Round(matrix[i, j], 5);
-                    MxMTransposeDgv.Rows[i].Cells[j].Value = matrix[i,j];
+                    MxMTransposeDgv.Rows[i].Cells[j].Value = matrix[i, j];
                 }
             }
         }
@@ -312,7 +369,7 @@ namespace PseudoInverse
         //////////////////////////////////////////////////////////////////////
         ///
 
-        public static double DET(int n, double[,] Mat)
+        public double DET(int n, double[,] Mat)
         {
             double d = 0;
             int k, i, j, subi, subj;
@@ -323,6 +380,8 @@ namespace PseudoInverse
             }
             else if(n == 2)
             {
+                toplamaSayisi += 1;
+                CarpmaSayisi += 2;
                 return ((Mat[0, 0] * Mat[1, 1]) - (Mat[1, 0] * Mat[0, 1]));
             }
             else
@@ -341,10 +400,14 @@ namespace PseudoInverse
                             }
                             SUBMat[subi, subj] = Mat[i, j];
                             subj++;
+                            toplamaSayisi += 1;
                         }
                         subi++;
+                        toplamaSayisi += 1;
                     }
                     d = d + (Math.Pow(-1, k) * Mat[0, k] * DET(n - 1, SUBMat));
+                    toplamaSayisi += 1;
+                    CarpmaSayisi += 2;
                 }
             }
             return d;
@@ -372,11 +435,20 @@ namespace PseudoInverse
 
                     // sign of adj[j][i] positive if sum of row 
                     // and column indexes is even. 
-                    sign = ((i + j) % 2 == 0) ? 1 : -1;
+                    if((i + j) % 2 == 0)
+                    {
+                        sign = 1;
+                    }
+                    else
+                    {
+                        sign = -1;
+                    }
+                    //sign = ((i + j) % 2 == 0) ? 1 : -1;
 
                     // Interchanging rows and columns to get the 
                     // transpose of the cofactor matrix 
                     adj[j, i] = (sign) * (DET((A.GetLength(0) - 1), temp));
+                    CarpmaSayisi += 1;
                 }
             }
 
@@ -426,6 +498,7 @@ namespace PseudoInverse
                     for(int j = 0; j < A.GetLength(0); j++)
                     {
                         inverse[i, j] = adj[i, j] / determ;
+                        CarpmaSayisi += 1;
                     }
                 }
             }
@@ -435,8 +508,11 @@ namespace PseudoInverse
 
         private void OkBttn_Click(object sender, EventArgs e)
         {
+            toplamaSayisi = 0;
+            CarpmaSayisi = 0;
             int M = Convert.ToInt32(mValue.Text);
             int N = Convert.ToInt32(nValue.Text);
+            nxtStepBttn.Enabled = true;
             firstMatris = new double[M, N];
             mValue.Enabled = true;
             nValue.Enabled = true;

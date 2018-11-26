@@ -48,9 +48,9 @@
             this.dgv.AllowUserToAddRows = false;
             this.dgv.AllowUserToDeleteRows = false;
             this.dgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv.Location = new System.Drawing.Point(21, 21);
+            this.dgv.Location = new System.Drawing.Point(21, 12);
             this.dgv.Name = "dgv";
-            this.dgv.Size = new System.Drawing.Size(125, 129);
+            this.dgv.Size = new System.Drawing.Size(125, 138);
             this.dgv.TabIndex = 1;
             // 
             // rndmBttn
@@ -65,7 +65,7 @@
             // 
             // mValue
             // 
-            this.mValue.Location = new System.Drawing.Point(21, 169);
+            this.mValue.Location = new System.Drawing.Point(21, 170);
             this.mValue.Name = "mValue";
             this.mValue.Size = new System.Drawing.Size(36, 20);
             this.mValue.TabIndex = 3;
@@ -73,7 +73,7 @@
             // 
             // nValue
             // 
-            this.nValue.Location = new System.Drawing.Point(63, 169);
+            this.nValue.Location = new System.Drawing.Point(63, 170);
             this.nValue.Name = "nValue";
             this.nValue.Size = new System.Drawing.Size(36, 20);
             this.nValue.TabIndex = 4;
@@ -81,7 +81,7 @@
             // 
             // handBttn
             // 
-            this.handBttn.Location = new System.Drawing.Point(105, 167);
+            this.handBttn.Location = new System.Drawing.Point(105, 168);
             this.handBttn.Name = "handBttn";
             this.handBttn.Size = new System.Drawing.Size(59, 23);
             this.handBttn.TabIndex = 5;
@@ -92,7 +92,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(60, 153);
+            this.label1.Location = new System.Drawing.Point(60, 154);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(35, 13);
             this.label1.TabIndex = 6;
@@ -102,7 +102,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(18, 153);
+            this.label2.Location = new System.Drawing.Point(18, 154);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(28, 13);
             this.label2.TabIndex = 7;
@@ -114,10 +114,10 @@
             this.MxMTransposeDgv.AllowUserToAddRows = false;
             this.MxMTransposeDgv.AllowUserToDeleteRows = false;
             this.MxMTransposeDgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.MxMTransposeDgv.Location = new System.Drawing.Point(233, 21);
+            this.MxMTransposeDgv.Location = new System.Drawing.Point(233, 19);
             this.MxMTransposeDgv.Name = "MxMTransposeDgv";
             this.MxMTransposeDgv.ReadOnly = true;
-            this.MxMTransposeDgv.Size = new System.Drawing.Size(509, 168);
+            this.MxMTransposeDgv.Size = new System.Drawing.Size(509, 170);
             this.MxMTransposeDgv.TabIndex = 10;
             // 
             // nxtStepBttn
@@ -140,7 +140,7 @@
             // 
             // OkBttn
             // 
-            this.OkBttn.Location = new System.Drawing.Point(170, 166);
+            this.OkBttn.Location = new System.Drawing.Point(170, 167);
             this.OkBttn.Name = "OkBttn";
             this.OkBttn.Size = new System.Drawing.Size(57, 23);
             this.OkBttn.TabIndex = 13;
