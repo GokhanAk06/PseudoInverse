@@ -15,7 +15,10 @@ namespace PseudoInverse
 
         Random rnd = new Random();
         double[,] firstMatris;
-        double[,] firstMatrisTranspose;
+        double[,] AtA;
+        double[,] AAt;
+        double[,] E;
+        int sayac = 0;
 
         public mainScreen()
         {
@@ -54,6 +57,7 @@ namespace PseudoInverse
 
         private void rndmBttn_Click(object sender, EventArgs e)
         {
+            sayac = 0;
             dgv.Rows.Clear();
             dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             dgv.Enabled = false;
@@ -84,17 +88,18 @@ namespace PseudoInverse
                 }
             }
 
-
-
         }
+
 
         public void dgvColumn(int M)
         {
             dgv.ColumnCount = M;
         }
 
+
         private void handBttn_Click(object sender, EventArgs e)
         {
+            sayac = 0;
             int M = 0, N = 0;
             dgv.Rows.Clear();
             if(Convert.ToInt32(mValue.Text) >= 1 && Convert.ToInt32(mValue.Text) < 6 && Convert.ToInt32(nValue.Text) >= 1 && Convert.ToInt32(nValue.Text) < 6 && Convert.ToInt32(nValue.Text) != Convert.ToInt32(mValue.Text))
@@ -109,8 +114,8 @@ namespace PseudoInverse
                 nValue.Text = string.Empty;
             }
 
-            dgvColumn(M);
-            for(int i = 0; i < N; i++)
+            dgvColumn(N);
+            for(int i = 0; i < M; i++)
             {
                 dgv.Rows.Add();
             }
@@ -120,6 +125,8 @@ namespace PseudoInverse
             dgv.RowHeadersVisible = false;
         }
 
+
+        //Textboxlara sadece 1 ile 5 arası sayı kontrolü
         private void mValue_TextChanged(object sender, EventArgs e)
         {
             if(System.Text.RegularExpressions.Regex.IsMatch(mValue.Text, "[^1-5]"))
@@ -139,71 +146,246 @@ namespace PseudoInverse
         }
 
         // M*MTranspose u hesaplıyor.
-        public double[,] mxmTranspose(double[,] M,double[,] MTr)
+        public double[,] mxmTranspose(double[,] M, double[,] MTr)
         {
             int n = M.GetLength(0);
             int m = MTr.GetLength(1);
             double[,] mxmTranspose = new double[m, n];
 
-            
+
             for(int i = 0; i < n; i++)
             {
                 for(int j = 0; j < m; j++)
                 {
                     double toplam = 0;
-                    for(int k =0; k < M.GetLength(1); k++)
+                    for(int k = 0; k < M.GetLength(1); k++)
                     {
                         toplam += M[i, k] * MTr[k, j];
                     }
                     mxmTranspose[i, j] = toplam;
                 }
             }
-
             return mxmTranspose;
         }
 
+        int matrisimiz = 0;
         private void nxtStepBttn_Click(object sender, EventArgs e)
         {
-            mTranspose();
-            mxmTransposeDgvWriter();
-            
+            if(sayac == 0)
+            {
+                //Mtranspose X M
+                sayac += 1;
+                mxmTransposeDgvWriter(firstMatris);
+                MessageBox.Show("A Transpose x A nın determinantı hesaplanacaktır.");
+                double determinant = DET(E.GetLength(0), E);
+                if(determinant == 0)
+                {
+                    matrisimiz = 1;
+                    MessageBox.Show("A Transpose x A nın determinantı 0 olduğundan dolayı A x A Transpose hesaplanacaktır.");
+                    mxmTransposeDgvWriter(mTranspose(firstMatris));
+                    determinant = DET(E.GetLength(0), E);
+                    if(determinant == 0)
+                    {
+                        matrisimiz = 2;
+                        MessageBox.Show("Her iki durumda da determinant 0 olduğundan dolayı matrisin tersi bulunamamaktadır.");
+                        return;
+                    }
+                }
+                MessageBox.Show("Determinant= " + determinant);
+            }
+            else if(sayac == 1)
+            {
+                sayac += 1;
+                if(matrisimiz == 0)
+                {
+
+                }
+                MessageBox.Show("Matrisin İnverse Edilmiş Hali.");
+                nextDgvWriter(inverse(E));
+
+
+            }
+
+            // nextDgvWriter(Eselon(firstMatris), "Eselon");
+
         }
 
-        public void mTranspose()
+        public double[,] mTranspose(double[,] matrix)
         {
 
             //GetLength(1) Satır
-            firstMatrisTranspose = new double[firstMatris.GetLength(1), firstMatris.GetLength(0)];
-            for(int c = 0; c < firstMatris.GetLength(1); c++)
+            double[,] matrixTranspose = new double[matrix.GetLength(1), matrix.GetLength(0)];
+            for(int c = 0; c < matrix.GetLength(1); c++)
             {
-                for(int r = 0; r < firstMatris.GetLength(0); r++)
+                for(int r = 0; r < matrix.GetLength(0); r++)
                 {
-                    firstMatrisTranspose[c, r] = firstMatris[r, c];
+                    matrixTranspose[c, r] = matrix[r, c];
                 }
             }
+            return matrixTranspose;
         }
 
-        public void mxmTransposeDgvWriter()
+        public void mxmTransposeDgvWriter(double[,] firstMatris)
         {
-            label5.Text = "A*ATranspose";
-            double[,] t = mxmTranspose(firstMatris,firstMatrisTranspose);
+            double[,] t = mxmTranspose(mTranspose(firstMatris), firstMatris);
+            E = new double[t.GetLength(1), t.GetLength(0)];
+
+            for(int i = 0; i < t.GetLength(1); i++)
+            {
+                for(int j = 0; j < t.GetLength(0); j++)
+                {
+                    E[i, j] = t[i, j];
+                }
+            }
+            nextDgvWriter(E);
+        }
+
+
+        public void nextDgvWriter(double[,] matrix)
+        {
+
             MxMTransposeDgv.Rows.Clear();
             MxMTransposeDgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             MxMTransposeDgv.Enabled = false;
             MxMTransposeDgv.RowHeadersVisible = false;
-
-            MxMTransposeDgv.ColumnCount = firstMatris.GetLength(0);
-
-            for(int i = 0; i < t.GetLength(1); i++)
+            MxMTransposeDgv.ColumnCount = matrix.GetLength(1);
+            double rand;
+            for(int i = 0; i < matrix.GetLength(0); i++)
             {
                 MxMTransposeDgv.Rows.Add();
-                for(int j = 0; j < t.GetLength(0); j++)
+                for(int j = 0; j < matrix.GetLength(1); j++)
                 {
-                    MxMTransposeDgv.Rows[i].Cells[j].Value = t[i, j];
+                    rand = Math.Round(matrix[i, j], 5);
+                    MxMTransposeDgv.Rows[i].Cells[j].Value = rand ;
                 }
             }
         }
 
-       
+        //////////////////////////////////////////////////////////////////////
+        ///
+
+        public static double DET(int n, double[,] Mat)
+        {
+            double d = 0;
+            int k, i, j, subi, subj;
+            double[,] SUBMat = new double[n, n];
+            if(n == 1)
+            {
+                return Mat[0, 0];
+            }
+            else if(n == 2)
+            {
+                return ((Mat[0, 0] * Mat[1, 1]) - (Mat[1, 0] * Mat[0, 1]));
+            }
+            else
+            {
+                for(k = 0; k < n; k++)
+                {
+                    subi = 0;
+                    for(i = 1; i < n; i++)
+                    {
+                        subj = 0;
+                        for(j = 0; j < n; j++)
+                        {
+                            if(j == k)
+                            {
+                                continue;
+                            }
+                            SUBMat[subi, subj] = Mat[i, j];
+                            subj++;
+                        }
+                        subi++;
+                    }
+                    d = d + (Math.Pow(-1, k) * Mat[0, k] * DET(n - 1, SUBMat));
+                }
+            }
+            return d;
+        }
+
+
+        //ADJ MATRİSİNİ BULUYOR. 
+        public double[,] adjoint(double[,] A)
+        {
+            double[,] adj = new double[A.GetLength(0), A.GetLength(0)];
+            if(A.GetLength(0) == 1)
+            {
+                adj[0, 0] = 1;
+                return null;
+            }
+            int sign = 1;
+            double[,] temp = new double[A.GetLength(0), A.GetLength(1)];
+
+            for(int i = 0; i < A.GetLength(0); i++)
+            {
+                for(int j = 0; j < A.GetLength(0); j++)
+                {
+                    // Get cofactor of A[i][j] 
+                    getCofactor(A, temp, i, j, A.GetLength(0));
+
+                    // sign of adj[j][i] positive if sum of row 
+                    // and column indexes is even. 
+                    sign = ((i + j) % 2 == 0) ? 1 : -1;
+
+                    // Interchanging rows and columns to get the 
+                    // transpose of the cofactor matrix 
+                    adj[j, i] = (sign) * (DET((A.GetLength(0) - 1), temp));
+                }
+            }
+
+            return adj;
+        }
+
+        void getCofactor(double[,] A, double[,] temp, int p, int q, int n)
+        {
+            int i = 0, j = 0;
+
+            for(int row = 0; row < n; row++)
+            {
+                for(int col = 0; col < n; col++)
+                {
+                    if(row != p && col != q)
+                    {
+                        temp[i, j++] = A[row, col];
+
+                        if(j == n - 1)
+                        {
+                            j = 0;
+                            i++;
+                        }
+                    }
+                }
+            }
+
+        }
+
+        public double[,] inverse(double[,] A)
+        {
+            double determ = DET(A.GetLength(0), A);
+            double[,] inverse = new double[A.GetLength(0), A.GetLength(0)];
+
+            if(determ == 0)
+            {
+                MessageBox.Show("Determinant 0 olduğundan işlem yapılamamaktadır.");
+                return null;
+            }
+            double[,] adj = new double[A.GetLength(0), A.GetLength(0)];
+            adj = adjoint(A);
+
+            if(adj != null)
+            {
+                for(int i = 0; i < A.GetLength(0); i++)
+                {
+                    for(int j = 0; j < A.GetLength(0); j++)
+                    {
+                        inverse[i, j] = adj[i, j] / determ;
+                    }
+                }
+            }
+
+            return inverse;
+        }
+
+
+
     }
 }
